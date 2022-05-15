@@ -1,0 +1,23 @@
+.heading {
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+  box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.heading .title {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.heading .title a {
+  text-decoration: none;
+}
+
+.heading .blue {
+  color: #3B82F6;
+}
+
+.heading .red {
+  color: #EF4444;
+}
