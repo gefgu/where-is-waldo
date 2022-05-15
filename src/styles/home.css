@@ -1,5 +1,8 @@
 .home {
   padding: 32px 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
 }
 
 .levels-display {
@@ -39,4 +42,38 @@
 
 .level .icons img {
   height: 30px;
+}
+
+.leaderboard-card {
+  background-color: #F9FAFB;
+  border-radius: 12px;
+  padding: 64px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  gap: 24px;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard-card h3 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.leaderboard-card .leaderboard-button {
+  padding: 12px 24px;
+  border: 0;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #F87171;
+  color: white;
+}
+
+.leaderboard-card .leaderboard-button:hover {
+  background-color: #EF4444;
+}
+
+.leaderboard-card .leaderboard-button:active {
+  background-color: #DC2626;
 }
