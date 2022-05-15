@@ -3,6 +3,7 @@ import GameLevel from "./components/GameLevel";
 import Heading from "./components/Heading";
 import Home from "./components/Home";
 import Leaderboard from "./components/Leaderboard";
+import "./styles/app.css";
 
 function App() {
   return (
