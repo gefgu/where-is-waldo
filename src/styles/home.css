@@ -27,4 +27,16 @@
 
 .level .description {
   padding: 12px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.level .icons {
+  display: flex;
+  gap: 8px;
+}
+
+.level .icons img {
+  height: 30px;
 }
