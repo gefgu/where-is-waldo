@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "../styles/home.css";
 
 const Home = () => {
@@ -67,6 +68,14 @@ const Home = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="leaderboard-card">
+        <h3>Are you a Waldo expert?</h3>
+        <h3>View the leaderboard</h3>
+        <Link to="leaderboard">
+          <button className="leaderboard-button">View Leaderboard</button>
+        </Link>
       </div>
     </div>
   );
