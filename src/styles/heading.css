@@ -1,17 +1,22 @@
 .heading {
   display: flex;
   justify-content: center;
-  padding: 8px;
+  align-items: center;
   box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
 .heading .title {
   margin: 0;
-  font-size: 2rem;
+  font-size: 2.2rem;
+  font-weight: bold;
+  
 }
 
 .heading .title a {
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .heading .blue {
@@ -20,4 +25,10 @@
 
 .heading .red {
   color: #EF4444;
+}
+
+.heading img {
+  height: 75px;
+  width: auto;
+  margin-right: 8px;
 }

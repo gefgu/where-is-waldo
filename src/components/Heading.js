@@ -4,9 +4,13 @@ import "../styles/heading.css";
 const Heading = () => {
   return (
     <div className="heading">
-      <h1 className="title">
-        <Link to="/"><span className="blue">Where's</span> <span className="red">Waldo?</span></Link>
-      </h1>
+      <div className="title">
+        <Link to="/">
+          <img src={require("../assets/waldo-heading.jpg")} alt="Waldo" />
+          <span className="blue">Where's</span>{" "}
+          <span className="red">Waldo?</span>
+        </Link>
+      </div>
     </div>
   );
 };
