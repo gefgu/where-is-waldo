@@ -1,11 +1,11 @@
 .home {
-  padding: 64px;
+  padding: 32px 96px;
 }
 
 .levels-display {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 64px;
+  gap: 32px;
 }
 
 .level {
