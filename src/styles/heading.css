@@ -9,7 +9,6 @@
   margin: 0;
   font-size: 2.2rem;
   font-weight: bold;
-  
 }
 
 .heading .title a {
@@ -20,11 +19,7 @@
 }
 
 .heading .blue {
-  color: #3B82F6;
-}
-
-.heading .red {
-  color: #EF4444;
+  color: #3b82f6;
 }
 
 .heading img {
