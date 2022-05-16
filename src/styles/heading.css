@@ -3,6 +3,10 @@
   justify-content: center;
   align-items: center;
   box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  width: 100%;
+  top: 0;
+  background-color: white;
 }
 
 .heading .title {
