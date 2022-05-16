@@ -1,0 +1,38 @@
+.levels-display {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.level {
+  box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.level:hover {
+  box-shadow: 0 1px 8px 1px rgba(0, 0, 0, 0.25);
+}
+
+.level img {
+  width: 100%;
+  height: 14rem;
+  object-fit: cover;
+}
+
+.level .description {
+  padding: 12px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.level .icons {
+  display: flex;
+  gap: 8px;
+}
+
+.level .icons img {
+  height: 30px;
+}
