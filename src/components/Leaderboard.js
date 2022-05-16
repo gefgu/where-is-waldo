@@ -7,8 +7,8 @@ const Leaderboard = () => {
       <div>
         <h1>Leaderboard</h1>
         <div className="buttons">
-          <button>Play This Level</button>
-          <button>Back To Home</button>
+          <button className="play">Play This Level</button>
+          <button className="back">Back To Home</button>
         </div>
       </div>
       <LevelsDisplay />

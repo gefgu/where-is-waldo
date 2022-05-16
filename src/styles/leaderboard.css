@@ -4,3 +4,42 @@
   flex-direction: column;
   gap: 24px;
 }
+
+.buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.buttons button {
+  font-size: 1.1rem;
+  padding: 12px 18px;
+  border-radius: 8px;
+  border: none;
+}
+
+.buttons .play {
+  color: white;
+  background-color: #f87171;
+  border: none;
+}
+
+.buttons .play:hover {
+  background-color: #ef4444;
+}
+
+.buttons .play:active {
+  background-color: #dc2626;
+}
+
+.buttons .back {
+  color: #ef4444;
+  background-color: white;
+}
+
+.buttons .back:hover {
+  background-color: #fef2f2;
+}
+
+.buttons .back:active {
+  background-color: #fee2e2;
+}
