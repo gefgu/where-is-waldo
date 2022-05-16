@@ -43,3 +43,26 @@
 .buttons .back:active {
   background-color: #fee2e2;
 }
+
+.data table {
+  text-align: left;
+  table-layout: fixed;
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+  border-collapse: collapse;
+}
+
+.data th,
+.data td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.data td {
+  font-size: 0.9rem;
+}
+
+.data tbody:last-child {
+  border-bottom: none;
+}
