@@ -1,5 +1,6 @@
 import LevelsDisplay from "./LevelsDisplay";
 import "../styles/leaderboard.css";
+import { Link } from "react-router-dom";
 
 const Leaderboard = () => {
   return (
@@ -8,7 +9,9 @@ const Leaderboard = () => {
         <h1>Leaderboard</h1>
         <div className="buttons">
           <button className="play">Play This Level</button>
-          <button className="back">Back To Home</button>
+          <Link to="/">
+            <button className="back">Back To Home</button>
+          </Link>
         </div>
       </div>
       <LevelsDisplay />
