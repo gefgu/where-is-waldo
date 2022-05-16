@@ -1,0 +1,6 @@
+.leaderboard {
+  padding: 32px 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}

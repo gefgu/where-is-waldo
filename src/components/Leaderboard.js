@@ -1,12 +1,15 @@
 import LevelsDisplay from "./LevelsDisplay";
+import "../styles/leaderboard.css";
 
 const Leaderboard = () => {
   return (
     <div className="leaderboard">
-      <h1>Leaderboard</h1>
-      <div className="buttons">
-        <button>Play This Level</button>
-        <button>Back To Home</button>
+      <div>
+        <h1>Leaderboard</h1>
+        <div className="buttons">
+          <button>Play This Level</button>
+          <button>Back To Home</button>
+        </div>
       </div>
       <LevelsDisplay />
       <div className="data">
