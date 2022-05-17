@@ -1,3 +1,5 @@
+import "../styles/gamelevel.css";
+
 const GameLevel = () => {
   return (
     <div className="game-container">
@@ -7,7 +9,7 @@ const GameLevel = () => {
           <img src={require("../assets/waldo.jpg")} alt="waldo" />
           <img src={require("../assets/wizard.jpg")} alt="wizard" />
         </div>
-        <button>Return Home</button>
+        <button className="back">Return Home</button>
       </div>
       <div className="game">
         <img src={require("../assets/level-1.jpg")} alt="level 1" />

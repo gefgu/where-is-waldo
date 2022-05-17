@@ -1,0 +1,52 @@
+.game-container {
+  padding: 32px 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.level-description {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 128px;
+}
+
+.level-description .icons {
+  display: flex;
+  gap: 16px;
+}
+
+.level-description .icons img {
+  height: 60px;
+}
+
+.level-description .back {
+  font-size: 1.1rem;
+  padding: 12px 18px;
+  border-radius: 8px;
+  border: none;
+}
+
+.level-description .back {
+  color: white;
+  background-color: #f87171;
+}
+
+.level-description .back:hover {
+  background-color: #ef4444;
+}
+
+.level-description .back:active {
+  background-color: #dc2626;
+}
+
+.game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game img {
+  max-width: 100%;
+  height: auto;
+}
