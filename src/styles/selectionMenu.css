@@ -1,6 +1,7 @@
-.selecetion-menu {
+.selection-menu {
   background-color: white;
   color: black;
   width: 100px;
   height: 60px;
+  position: absolute;
 }
