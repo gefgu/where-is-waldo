@@ -23,8 +23,17 @@ const GameLevel = () => {
         onClick={(e) => {
           if (!shouldDisplayMenu) setShouldDisplayMenu(true);
           const bounds = e.target.getBoundingClientRect();
-          setMenuX(e.clientX - bounds.left);
-          setMenuY(e.clientY - bounds.top);
+          const x = e.clientX - bounds.left;
+          const y = e.clientY - bounds.top;
+          const cw = e.target.clientWidth;
+          const ch = e.target.clientHeight;
+          const iw = e.target.naturalWidth;
+          const ih = e.target.naturalHeight;
+          const xPositionOnImage = (x / cw) * iw;
+          const yPositionOnImage = (y / ch) * ih;
+          console.log([xPositionOnImage, yPositionOnImage]);
+          setMenuX(x);
+          setMenuY(y);
         }}
       >
         <SelectionMenu x={menuX} y={menuY} shouldDisplay={shouldDisplayMenu} />
