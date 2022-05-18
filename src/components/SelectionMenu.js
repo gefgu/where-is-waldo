@@ -10,7 +10,18 @@ const SelectionMenu = ({ x, y, shouldDisplay }) => {
 
   return (
     <div className="selection-menu" style={positionStyle}>
-      <p>MENU</p>
+      <div>
+        <img src={require("../assets/odlaw.jpg")} alt="odlaw" />
+        Odlaw
+      </div>
+      <div>
+        <img src={require("../assets/waldo.jpg")} alt="waldo" />
+        Waldo
+      </div>
+      <div>
+        <img src={require("../assets/wizard.jpg")} alt="wizard" />
+        Wizard
+      </div>
     </div>
   );
 };
