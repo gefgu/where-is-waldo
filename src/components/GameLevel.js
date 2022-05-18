@@ -5,6 +5,7 @@ import SelectionMenu from "./SelectionMenu";
 const GameLevel = () => {
   const [menuX, setMenuX] = useState(0);
   const [menuY, setMenuY] = useState(0);
+  const [shouldDisplayMenu, setShouldDisplayMenu] = useState(false);
 
   return (
     <div className="game-container">
@@ -19,12 +20,13 @@ const GameLevel = () => {
       <div
         className="game"
         onClick={(e) => {
+          if (!shouldDisplayMenu) setShouldDisplayMenu(true);
           const bounds = e.target.getBoundingClientRect();
           setMenuX(e.clientX - bounds.left);
           setMenuY(e.clientY - bounds.top);
         }}
       >
-        <SelectionMenu x={menuX} y={menuY} />
+        <SelectionMenu x={menuX} y={menuY} shouldDisplay={shouldDisplayMenu} />
         <img src={require("../assets/level-1.jpg")} alt="level 1" />
       </div>
     </div>
