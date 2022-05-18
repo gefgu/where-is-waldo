@@ -11,7 +11,7 @@ import "./styles/app.css";
 function App() {
   useEffect(() => {
     const app = initializeApp(firebaseConfig);
-  });
+  }, []);
 
   return (
     <BrowserRouter>
