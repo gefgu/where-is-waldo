@@ -15,6 +15,7 @@ const GameLevel = () => {
           <img src={require("../assets/waldo.jpg")} alt="waldo" />
           <img src={require("../assets/wizard.jpg")} alt="wizard" />
         </div>
+        <p>Click to find them!</p>
         <button className="back">Return Home</button>
       </div>
       <div

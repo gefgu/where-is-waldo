@@ -7,8 +7,12 @@
 
 .level-description {
   display: flex;
-  justify-content: space-evenly;
-  gap: 128px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.level-description p {
+  font-size: 1.25rem;
 }
 
 .level-description .icons {
