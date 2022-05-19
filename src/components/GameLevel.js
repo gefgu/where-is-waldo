@@ -7,6 +7,11 @@ const GameLevel = () => {
   const [menuY, setMenuY] = useState(0);
   const [shouldDisplayMenu, setShouldDisplayMenu] = useState(false);
 
+  const handleSelection = (e, characterSelected) => {
+    e.stopPropagation();
+    console.log(characterSelected);
+  };
+
   return (
     <div className="game-container">
       <div className="level-description">
@@ -22,6 +27,7 @@ const GameLevel = () => {
         className="game"
         onClick={(e) => {
           if (!shouldDisplayMenu) setShouldDisplayMenu(true);
+          console.log(e.target);
           const bounds = e.target.getBoundingClientRect();
           const x = e.clientX - bounds.left;
           const y = e.clientY - bounds.top;
@@ -36,7 +42,12 @@ const GameLevel = () => {
           setMenuY(y);
         }}
       >
-        <SelectionMenu x={menuX} y={menuY} shouldDisplay={shouldDisplayMenu} />
+        <SelectionMenu
+          x={menuX}
+          y={menuY}
+          shouldDisplay={shouldDisplayMenu}
+          handleSelection={handleSelection}
+        />
         <img src={require("../assets/level-1.jpg")} alt="level 1" />
       </div>
     </div>
