@@ -4,6 +4,10 @@
   gap: 32px;
 }
 
+.levels-display a {
+  text-decoration: none;
+}
+
 .level {
   box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.1);
   transition: all 0.2s;
@@ -26,6 +30,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: black;
 }
 
 .level .icons {
