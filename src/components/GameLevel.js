@@ -1,15 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/gamelevel.css";
 import SelectionMenu from "./SelectionMenu";
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  limit,
+  query,
+  where,
+} from "firebase/firestore";
 
 const GameLevel = () => {
   const [menuX, setMenuX] = useState(0);
   const [menuY, setMenuY] = useState(0);
   const [shouldDisplayMenu, setShouldDisplayMenu] = useState(false);
+  const [levelData, setLevelData] = useState(false);
+
+  useEffect(() => {
+    const dataQuery = query(
+      collection(getFirestore(), "levelData"),
+      where("level", "==", 1),
+      limit(1)
+    );
+
+    getDocs(dataQuery).then((dataSnapshot) => {
+      setLevelData(dataSnapshot.docs[0].data());
+    });
+  }, []);
 
   const handleSelection = (e, characterSelected) => {
     e.stopPropagation();
     console.log(characterSelected);
+    console.log(levelData);
   };
 
   return (
