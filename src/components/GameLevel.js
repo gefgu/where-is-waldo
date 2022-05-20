@@ -9,7 +9,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const GameLevel = () => {
   const level = +useParams().level;
@@ -64,7 +64,9 @@ const GameLevel = () => {
           <img src={require("../assets/wizard.jpg")} alt="wizard" />
         </div>
         <p>Click to find them!</p>
-        <button className="back">Return Home</button>
+        <Link to="/">
+          <button className="back">Return Home</button>
+        </Link>
       </div>
       <div
         className="game"
