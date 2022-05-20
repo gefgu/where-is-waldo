@@ -15,6 +15,8 @@ const GameLevel = () => {
   const [menuY, setMenuY] = useState(0);
   const [shouldDisplayMenu, setShouldDisplayMenu] = useState(false);
   const [levelData, setLevelData] = useState(false);
+  const [lastClickX, setLastClickX] = useState(-10);
+  const [lastClickY, setLastClickY] = useState(-10);
 
   useEffect(() => {
     const dataQuery = query(
@@ -28,10 +30,26 @@ const GameLevel = () => {
     });
   }, []);
 
+  const hitTarget = (xClick, yClick, xPosition, yPosition) => {
+    const withinXBoundary = xClick > xPosition - 20 && xClick < xPosition + 20;
+    const whithinYBoundary = yClick > yPosition - 20 && yClick < yPosition + 20;
+    if (withinXBoundary && whithinYBoundary) {
+      return true;
+    }
+    return false;
+  };
+
   const handleSelection = (e, characterSelected) => {
     e.stopPropagation();
-    console.log(characterSelected);
-    console.log(levelData);
+    const positionOfCharacter = levelData.positions[characterSelected];
+    console.log(
+      hitTarget(
+        lastClickX,
+        lastClickY,
+        positionOfCharacter.x,
+        positionOfCharacter.y
+      )
+    );
   };
 
   return (
@@ -49,7 +67,6 @@ const GameLevel = () => {
         className="game"
         onClick={(e) => {
           if (!shouldDisplayMenu) setShouldDisplayMenu(true);
-          console.log(e.target);
           const bounds = e.target.getBoundingClientRect();
           const x = e.clientX - bounds.left;
           const y = e.clientY - bounds.top;
@@ -59,7 +76,8 @@ const GameLevel = () => {
           const ih = e.target.naturalHeight;
           const xPositionOnImage = (x / cw) * iw;
           const yPositionOnImage = (y / ch) * ih;
-          console.log([xPositionOnImage, yPositionOnImage]);
+          setLastClickX(xPositionOnImage);
+          setLastClickY(yPositionOnImage);
           setMenuX(x);
           setMenuY(y);
         }}
