@@ -1,6 +1,18 @@
+import { useEffect } from "react";
 import "../styles/levelsDisplay.css";
+import { collection, getDocs, getFirestore, query } from "firebase/firestore";
 
 const LevelsDisplay = () => {
+  useEffect(() => {
+    const levelsQuery = query(collection(getFirestore(), "levelData"));
+
+    getDocs(levelsQuery).then((levelsSnapshot) => {
+      levelsSnapshot.forEach((level) => {
+        console.log(level.data());
+      });
+    });
+  }, []);
+
   return (
     <div className="levels-display">
       <div className="level">
