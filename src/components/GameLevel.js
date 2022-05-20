@@ -9,8 +9,11 @@ import {
   query,
   where,
 } from "firebase/firestore";
+import { useParams } from "react-router-dom";
 
 const GameLevel = () => {
+  const level = useParams().level;
+
   const [menuX, setMenuX] = useState(0);
   const [menuY, setMenuY] = useState(0);
   const [shouldDisplayMenu, setShouldDisplayMenu] = useState(false);

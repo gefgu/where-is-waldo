@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import "../styles/levelsDisplay.css";
 import { collection, getDocs, getFirestore, query } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 const LevelsDisplay = () => {
   useEffect(() => {
@@ -15,17 +16,19 @@ const LevelsDisplay = () => {
 
   return (
     <div className="levels-display">
-      <div className="level">
-        <img src={require("../assets/level-1.jpg")} alt="level 1" />
-        <div className="description">
-          Level 1
-          <div className="icons">
-            <img src={require("../assets/odlaw.jpg")} alt="odlaw" />
-            <img src={require("../assets/waldo.jpg")} alt="waldo" />
-            <img src={require("../assets/wizard.jpg")} alt="wizard" />
+      <Link to="/game/1">
+        <div className="level">
+          <img src={require("../assets/level-1.jpg")} alt="level 1" />
+          <div className="description">
+            Level 1
+            <div className="icons">
+              <img src={require("../assets/odlaw.jpg")} alt="odlaw" />
+              <img src={require("../assets/waldo.jpg")} alt="waldo" />
+              <img src={require("../assets/wizard.jpg")} alt="wizard" />
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
       <div className="level">
         <img src={require("../assets/level-2.jpg")} alt="level 2" />
         <div className="description">

@@ -15,8 +15,10 @@ function App() {
       <Heading />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/game" element={<GameLevel />} />
-        <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="leaderboard" element={<Leaderboard />} />
+        <Route path="game">
+          <Route path=":level" element={<GameLevel />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
