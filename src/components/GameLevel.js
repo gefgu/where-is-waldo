@@ -12,7 +12,7 @@ import {
 import { useParams } from "react-router-dom";
 
 const GameLevel = () => {
-  const level = useParams().level;
+  const level = +useParams().level;
 
   const [menuX, setMenuX] = useState(0);
   const [menuY, setMenuY] = useState(0);
@@ -24,7 +24,7 @@ const GameLevel = () => {
   useEffect(() => {
     const dataQuery = query(
       collection(getFirestore(), "levelData"),
-      where("level", "==", 1),
+      where("level", "==", level),
       limit(1)
     );
 
@@ -91,7 +91,10 @@ const GameLevel = () => {
           shouldDisplay={shouldDisplayMenu}
           handleSelection={handleSelection}
         />
-        <img src={require("../assets/level-1.jpg")} alt="level 1" />
+        <img
+          src={require(`../assets/level-${level}.jpg`)}
+          alt={`Level ${level}`}
+        />
       </div>
     </div>
   );
