@@ -6,7 +6,6 @@ const LevelsDisplay = ({ levelsData }) => {
     <div className="levels-display">
       {levelsData.map((levelData) => {
         const level = levelData.level;
-        console.log(levelData);
         return (
           <Link to={`/game/${level}`} key={level}>
             <div className="level">

@@ -1,37 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../styles/gamelevel.css";
 import SelectionMenu from "./SelectionMenu";
-import {
-  collection,
-  getDocs,
-  getFirestore,
-  limit,
-  query,
-  where,
-} from "firebase/firestore";
 import { Link, useParams } from "react-router-dom";
 
-const GameLevel = () => {
+const GameLevel = ({ levelsData }) => {
   const level = +useParams().level;
+  const levelData = levelsData.filter((value) => value.level === level);
 
   const [menuX, setMenuX] = useState(0);
   const [menuY, setMenuY] = useState(0);
   const [shouldDisplayMenu, setShouldDisplayMenu] = useState(false);
-  const [levelData, setLevelData] = useState(false);
   const [lastClickX, setLastClickX] = useState(-10);
   const [lastClickY, setLastClickY] = useState(-10);
-
-  useEffect(() => {
-    const dataQuery = query(
-      collection(getFirestore(), "levelData"),
-      where("level", "==", level),
-      limit(1)
-    );
-
-    getDocs(dataQuery).then((dataSnapshot) => {
-      setLevelData(dataSnapshot.docs[0].data());
-    });
-  }, []);
 
   const hitTarget = (xClick, yClick, xPosition, yPosition) => {
     const withinXBoundary = xClick > xPosition - 20 && xClick < xPosition + 20;
