@@ -1,15 +1,25 @@
 import { useEffect } from "react";
 import "../styles/levelsDisplay.css";
-import { collection, getDocs, getFirestore, query } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { Link } from "react-router-dom";
 
 const LevelsDisplay = () => {
   useEffect(() => {
-    const levelsQuery = query(collection(getFirestore(), "levelData"));
+    const levelsQuery = query(
+      collection(getFirestore(), "levelData"),
+      orderBy("level", "asc")
+    );
 
     getDocs(levelsQuery).then((levelsSnapshot) => {
       levelsSnapshot.forEach((level) => {
         console.log(level.data());
+        // Use DATA to add icons to levels display and game level
       });
     });
   }, []);
