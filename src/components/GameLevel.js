@@ -17,6 +17,8 @@ const GameLevel = ({ levelsData }) => {
   const hitTarget = (xClick, yClick, xPosition, yPosition) => {
     const withinXBoundary = xClick > xPosition - 20 && xClick < xPosition + 20;
     const whithinYBoundary = yClick > yPosition - 20 && yClick < yPosition + 20;
+    console.log([xClick, yClick, xPosition, yPosition]);
+    console.log([withinXBoundary, whithinYBoundary]);
     if (withinXBoundary && whithinYBoundary) {
       return true;
     }
@@ -55,11 +57,13 @@ const GameLevel = ({ levelsData }) => {
     );
     if (numberOfRightHits === Object.keys(levelData.positions).length) {
       endGame();
+
+      // Work on End Game and Set Leaderboard
     }
   };
 
   const endGame = () => {
-    console.log("Win");
+    alert("Win");
   };
 
   return (
@@ -101,6 +105,7 @@ const GameLevel = ({ levelsData }) => {
           const ih = e.target.naturalHeight;
           const xPositionOnImage = (x / cw) * iw;
           const yPositionOnImage = (y / ch) * ih;
+          console.log([xPositionOnImage, yPositionOnImage]);
           setLastClickX(xPositionOnImage);
           setLastClickY(yPositionOnImage);
           setMenuX(x);
@@ -112,6 +117,7 @@ const GameLevel = ({ levelsData }) => {
           y={menuY}
           shouldDisplay={shouldDisplayMenu}
           handleSelection={handleSelection}
+          levelData={levelData}
         />
         <img
           src={require(`../assets/level-${level}.jpg`)}
