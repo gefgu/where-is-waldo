@@ -12,6 +12,7 @@ const GameLevel = ({ levelsData }) => {
   const [shouldDisplayMenu, setShouldDisplayMenu] = useState(false);
   const [lastClickX, setLastClickX] = useState(-10);
   const [lastClickY, setLastClickY] = useState(-10);
+  const [hits, setHits] = useState({});
 
   const hitTarget = (xClick, yClick, xPosition, yPosition) => {
     const withinXBoundary = xClick > xPosition - 20 && xClick < xPosition + 20;
@@ -25,14 +26,40 @@ const GameLevel = ({ levelsData }) => {
   const handleSelection = (e, characterSelected) => {
     e.stopPropagation();
     const positionOfCharacter = levelData.positions[characterSelected];
-    console.log(
-      hitTarget(
-        lastClickX,
-        lastClickY,
-        positionOfCharacter.x,
-        positionOfCharacter.y
-      )
+    const hit = hitTarget(
+      lastClickX,
+      lastClickY,
+      positionOfCharacter.x,
+      positionOfCharacter.y
     );
+
+    const hitObject = hits;
+
+    if (
+      !Object.keys(hits).includes(characterSelected) ||
+      hits[characterSelected] === false
+    ) {
+      hitObject[characterSelected] = hit;
+    }
+
+    setShouldDisplayMenu(false);
+    setHits(hitObject);
+    const numberOfRightHits = Object.keys(hitObject).reduce(
+      (previous, current) => {
+        if (hitObject[current]) {
+          return previous + 1;
+        }
+        return previous;
+      },
+      0
+    );
+    if (numberOfRightHits === Object.keys(levelData.positions).length) {
+      endGame();
+    }
+  };
+
+  const endGame = () => {
+    console.log("Win");
   };
 
   return (
@@ -46,6 +73,7 @@ const GameLevel = ({ levelsData }) => {
                     key={character}
                     src={require(`../assets/${character}.jpg`)}
                     alt={character}
+                    className={hits[character] ? "hit" : "to-hit"}
                   />
                 );
               })

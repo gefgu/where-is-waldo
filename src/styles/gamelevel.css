@@ -24,6 +24,10 @@
   height: 60px;
 }
 
+.level-description .icons img.hit {
+  opacity: 0.4;
+}
+
 .level-description .back {
   font-size: 1.1rem;
   padding: 12px 18px;
