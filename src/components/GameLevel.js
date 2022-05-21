@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 
 const GameLevel = ({ levelsData }) => {
   const level = +useParams().level;
-  const levelData = levelsData.filter((value) => value.level === level);
+  const levelData = levelsData.filter((value) => value.level === level)[0];
 
   const [menuX, setMenuX] = useState(0);
   const [menuY, setMenuY] = useState(0);
@@ -39,9 +39,17 @@ const GameLevel = ({ levelsData }) => {
     <div className="game-container">
       <div className="level-description">
         <div className="icons">
-          <img src={require("../assets/odlaw.jpg")} alt="odlaw" />
-          <img src={require("../assets/waldo.jpg")} alt="waldo" />
-          <img src={require("../assets/wizard.jpg")} alt="wizard" />
+          {levelData
+            ? Object.keys(levelData.positions).map((character) => {
+                return (
+                  <img
+                    key={character}
+                    src={require(`../assets/${character}.jpg`)}
+                    alt={character}
+                  />
+                );
+              })
+            : ""}
         </div>
         <p>Click to find them!</p>
         <Link to="/">
