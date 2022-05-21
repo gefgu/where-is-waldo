@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import "../styles/home.css";
 import LevelsDisplay from "./LevelsDisplay";
 
-const Home = () => {
+const Home = ({ levelsData }) => {
   return (
     <div className="home">
-      <LevelsDisplay />
+      <LevelsDisplay levelsData={levelsData} />
 
       <div className="leaderboard-card">
         <div>

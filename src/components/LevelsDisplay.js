@@ -1,34 +1,7 @@
-import { useEffect, useState } from "react";
 import "../styles/levelsDisplay.css";
-import {
-  collection,
-  getDocs,
-  getFirestore,
-  orderBy,
-  query,
-} from "firebase/firestore";
 import { Link } from "react-router-dom";
 
-const LevelsDisplay = () => {
-  const [levelsData, setLevelsData] = useState([]);
-
-  useEffect(() => {
-    const getLevelData = async () => {
-      const levelsQuery = query(
-        collection(getFirestore(), "levelData"),
-        orderBy("level", "asc")
-      );
-
-      const levelsSnapshot = await getDocs(levelsQuery);
-      let newLevelData = [];
-      levelsSnapshot.forEach((level) => {
-        newLevelData.push(level.data());
-      });
-      setLevelsData(newLevelData);
-    };
-    getLevelData();
-  }, []);
-
+const LevelsDisplay = ({ levelsData }) => {
   return (
     <div className="levels-display">
       {levelsData.map((levelData) => {

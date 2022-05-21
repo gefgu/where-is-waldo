@@ -2,7 +2,7 @@ import LevelsDisplay from "./LevelsDisplay";
 import "../styles/leaderboard.css";
 import { Link } from "react-router-dom";
 
-const Leaderboard = () => {
+const Leaderboard = ({ levelsData }) => {
   return (
     <div className="leaderboard">
       <div>
@@ -14,7 +14,7 @@ const Leaderboard = () => {
           </Link>
         </div>
       </div>
-      <LevelsDisplay />
+      <LevelsDisplay levelsData={levelsData} />
       <div className="data">
         <table>
           <thead>
