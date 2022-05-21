@@ -17,14 +17,22 @@
 
 .level-description .icons {
   display: flex;
-  gap: 16px;
+  gap: 32px;
+}
+
+.level-description .icons > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .level-description .icons img {
   height: 60px;
 }
 
-.level-description .icons img.hit {
+.level-description .icons .hit {
   opacity: 0.4;
 }
 

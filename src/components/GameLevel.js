@@ -69,12 +69,16 @@ const GameLevel = ({ levelsData }) => {
           {levelData
             ? Object.keys(levelData.positions).map((character) => {
                 return (
-                  <img
+                  <div
                     key={character}
-                    src={require(`../assets/${character}.jpg`)}
-                    alt={character}
                     className={hits[character] ? "hit" : "to-hit"}
-                  />
+                  >
+                    <img
+                      src={require(`../assets/${character}.jpg`)}
+                      alt={character}
+                    />
+                    {character[0].toUpperCase() + character.substring(1)}
+                  </div>
                 );
               })
             : ""}
