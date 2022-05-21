@@ -20,6 +20,15 @@
   justify-content: center;
   align-items: center;
   gap: 24px;
+  cursor: pointer;
+}
+
+.selection-menu > div:hover {
+  background-color: #F3F4F6;
+}
+
+.selection-menu > div:active {
+  background-color: #E5E7EB;
 }
 
 .selection-menu img {
