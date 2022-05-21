@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "../styles/levelsDisplay.css";
 import {
   collection,
@@ -10,97 +10,55 @@ import {
 import { Link } from "react-router-dom";
 
 const LevelsDisplay = () => {
-  useEffect(() => {
-    const levelsQuery = query(
-      collection(getFirestore(), "levelData"),
-      orderBy("level", "asc")
-    );
+  const [levelsData, setLevelsData] = useState([]);
 
-    getDocs(levelsQuery).then((levelsSnapshot) => {
+  useEffect(() => {
+    const getLevelData = async () => {
+      const levelsQuery = query(
+        collection(getFirestore(), "levelData"),
+        orderBy("level", "asc")
+      );
+
+      const levelsSnapshot = await getDocs(levelsQuery);
+      let newLevelData = [];
       levelsSnapshot.forEach((level) => {
-        console.log(level.data());
-        // Use DATA to add icons to levels display and game level
+        newLevelData.push(level.data());
       });
-    });
+      setLevelsData(newLevelData);
+    };
+    getLevelData();
   }, []);
 
   return (
     <div className="levels-display">
-      <Link to="/game/1">
-        <div className="level">
-          <img src={require("../assets/level-1.jpg")} alt="level 1" />
-          <div className="description">
-            Level 1
-            <div className="icons">
-              <img src={require("../assets/odlaw.jpg")} alt="odlaw" />
-              <img src={require("../assets/waldo.jpg")} alt="waldo" />
-              <img src={require("../assets/wizard.jpg")} alt="wizard" />
+      {levelsData.map((levelData) => {
+        const level = levelData.level;
+        console.log(levelData);
+        return (
+          <Link to={`/game/${level}`} key={level}>
+            <div className="level">
+              <img
+                src={require(`../assets/level-${level}.jpg`)}
+                alt={`Level ${level}`}
+              />
+              <div className="description">
+                {`Level ${level}`}
+                <div className="icons">
+                  {Object.keys(levelData.positions).map((character) => {
+                    return (
+                      <img
+                        key={character}
+                        src={require(`../assets/${character}.jpg`)}
+                        alt={character}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </Link>
-      <Link to="/game/2">
-        <div className="level">
-          <img src={require("../assets/level-2.jpg")} alt="level 2" />
-          <div className="description">
-            Level 2
-            <div className="icons">
-              <img src={require("../assets/waldo.jpg")} alt="waldo" />
-            </div>
-          </div>
-        </div>
-      </Link>
-      <Link to="/game/3">
-        <div className="level">
-          <img src={require("../assets/level-3.jpg")} alt="level 3" />
-          <div className="description">
-            Level 3
-            <div className="icons">
-              <img src={require("../assets/odlaw.jpg")} alt="odlaw" />
-              <img src={require("../assets/waldo.jpg")} alt="waldo" />
-              <img src={require("../assets/wizard.jpg")} alt="wizard" />
-              <img src={require("../assets/wenda.jpg")} alt="wenda" />
-            </div>
-          </div>
-        </div>
-      </Link>
-      <Link to="/game/4">
-        <div className="level">
-          <img src={require("../assets/level-4.jpg")} alt="level 4" />
-          <div className="description">
-            Level 4
-            <div className="icons">
-              <img src={require("../assets/odlaw.jpg")} alt="odlaw" />
-              <img src={require("../assets/waldo.jpg")} alt="waldo" />
-            </div>
-          </div>
-        </div>
-      </Link>
-      <Link to="/game/5">
-        <div className="level">
-          <img src={require("../assets/level-5.jpg")} alt="level 5" />
-          <div className="description">
-            Level 5
-            <div className="icons">
-              <img src={require("../assets/odlaw.jpg")} alt="odlaw" />
-              <img src={require("../assets/waldo.jpg")} alt="waldo" />
-              <img src={require("../assets/wizard.jpg")} alt="wizard" />
-              <img src={require("../assets/wenda.jpg")} alt="wenda" />
-            </div>
-          </div>
-        </div>
-      </Link>
-      <Link to="/game/6">
-        <div className="level">
-          <img src={require("../assets/level-6.jpg")} alt="level 6" />
-          <div className="description">
-            Level 6
-            <div className="icons">
-              <img src={require("../assets/waldo.jpg")} alt="waldo" />
-            </div>
-          </div>
-        </div>
-      </Link>
+          </Link>
+        );
+      })}
     </div>
   );
 };
