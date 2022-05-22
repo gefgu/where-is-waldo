@@ -97,3 +97,8 @@ function App() {
 }
 
 export default App;
+
+// TODOS:
+// Add Form
+// Add X mark in hit spots
+// Add start button before game starts

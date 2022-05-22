@@ -3,6 +3,7 @@ import "../styles/gamelevel.css";
 import SelectionMenu from "./SelectionMenu";
 import { Link, useParams } from "react-router-dom";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
+import UserForm from "./UserForm";
 
 const GameLevel = ({ levelsData, checkIfNameInLeadearboardIsRepeated }) => {
   const level = +useParams().level;
@@ -80,9 +81,6 @@ const GameLevel = ({ levelsData, checkIfNameInLeadearboardIsRepeated }) => {
     do {
       name = prompt("What's Your Name: (For Leaderboard)");
     } while (checkIfNameInLeadearboardIsRepeated(name, level));
-    // Add Form
-    // Add X mark in hit spots
-
     if (name) {
       saveScore(name, finalTime);
     }
@@ -141,6 +139,7 @@ const GameLevel = ({ levelsData, checkIfNameInLeadearboardIsRepeated }) => {
           handleSelection={handleSelection}
           levelData={levelData}
         />
+        <UserForm />
         <img
           src={require(`../assets/level-${level}.jpg`)}
           alt={`Level ${level}`}
