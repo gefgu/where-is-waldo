@@ -9,6 +9,10 @@ const Leaderboard = ({ levelsData, leaderboardData }) => {
     (data) => data.level === currentLevel
   );
 
+  const changeLevelInDisplay = (level) => {
+    setCurrentLevel(level);
+  };
+
   return (
     <div className="leaderboard">
       <div>
@@ -20,7 +24,10 @@ const Leaderboard = ({ levelsData, leaderboardData }) => {
           </Link>
         </div>
       </div>
-      <LevelsDisplay levelsData={levelsData} />
+      <LevelsDisplay
+        levelsData={levelsData}
+        clickFunction={changeLevelInDisplay}
+      />
       <div className="data">
         <table>
           <thead>
