@@ -40,7 +40,7 @@ function App() {
       const leaderboardQuery = query(
         collection(getFirestore(), "leaderboard"),
         orderBy("level", "asc"),
-        orderBy("time", "asc")
+        // orderBy("time", "asc")
       );
 
       const leaderboardSnapshot = await getDocs(leaderboardQuery);
@@ -48,7 +48,6 @@ function App() {
       leaderboardSnapshot.forEach((score) => {
         newLeaderboardData.push(score.data());
       });
-      console.log(newLeaderboardData);
       setLeaderboardData(newLeaderboardData);
     };
     getLeaderboardData();
@@ -61,7 +60,12 @@ function App() {
         <Route path="/" element={<Home levelsData={levelsData} />} />
         <Route
           path="leaderboard"
-          element={<Leaderboard levelsData={levelsData} />}
+          element={
+            <Leaderboard
+              levelsData={levelsData}
+              leaderboardData={leaderboardData}
+            />
+          }
         />
         <Route path="game">
           <Route

@@ -1,8 +1,14 @@
 import LevelsDisplay from "./LevelsDisplay";
 import "../styles/leaderboard.css";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const Leaderboard = ({ levelsData }) => {
+const Leaderboard = ({ levelsData, leaderboardData }) => {
+  const [currentLevel, setCurrentLevel] = useState(1);
+  leaderboardData = leaderboardData.filter(
+    (data) => data.level === currentLevel
+  );
+
   return (
     <div className="leaderboard">
       <div>
@@ -24,34 +30,15 @@ const Leaderboard = ({ levelsData }) => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>User 1</td>
-              <td>1.245</td>
-            </tr>
-            <tr>
-              <td>User 2</td>
-              <td>1.245</td>
-            </tr>
-            <tr>
-              <td>User 3</td>
-              <td>1.245</td>
-            </tr>
-            <tr>
-              <td>User 4</td>
-              <td>1.245</td>
-            </tr>
-            <tr>
-              <td>User 5</td>
-              <td>1.245</td>
-            </tr>
-            <tr>
-              <td>User 6</td>
-              <td>1.245</td>
-            </tr>
-            <tr>
-              <td>User 7</td>
-              <td>1.245</td>
-            </tr>
+            {leaderboardData &&
+              leaderboardData.map((data) => {
+                return (
+                  <tr>
+                    <td>{data.name}</td>
+                    <td>{data.time}</td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </div>
