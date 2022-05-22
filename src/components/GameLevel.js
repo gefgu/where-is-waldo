@@ -4,7 +4,7 @@ import SelectionMenu from "./SelectionMenu";
 import { Link, useParams } from "react-router-dom";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 
-const GameLevel = ({ levelsData }) => {
+const GameLevel = ({ levelsData, checkIfNameInLeadearboardIsRepeated }) => {
   const level = +useParams().level;
   const levelData = levelsData.filter((value) => value.level === level)[0];
 
@@ -58,8 +58,6 @@ const GameLevel = ({ levelsData }) => {
     );
     if (numberOfRightHits === Object.keys(levelData.positions).length) {
       endGame();
-
-      // Work on End Game and Set Leaderboard
     }
   };
 
@@ -78,8 +76,16 @@ const GameLevel = ({ levelsData }) => {
   const endGame = () => {
     const finalTime = (Date.now() - startTime.current) / 1000; // To milliseconds to seconds
     alert(`Win time: ${finalTime} Seconds`);
-    const name = prompt("What's Your Name: (For Leaderboard)");
-    saveScore(name, finalTime);
+    let name;
+    do {
+      name = prompt("What's Your Name: (For Leaderboard)");
+    } while (checkIfNameInLeadearboardIsRepeated(name, level));
+    // Add Form
+    // Add X mark in hit spots
+
+    if (name) {
+      saveScore(name, finalTime);
+    }
   };
 
   return (

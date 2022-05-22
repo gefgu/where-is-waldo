@@ -39,7 +39,7 @@ function App() {
     const getLeaderboardData = async () => {
       const leaderboardQuery = query(
         collection(getFirestore(), "leaderboard"),
-        orderBy("level", "asc"),
+        orderBy("level", "asc")
       );
 
       const leaderboardSnapshot = await getDocs(leaderboardQuery);
@@ -51,6 +51,18 @@ function App() {
     };
     getLeaderboardData();
   }, []);
+
+  const checkIfNameInLeadearboardIsRepeated = (name, level) => {
+    const scoresFromLevel = leaderboardData.filter(
+      (data) => data.level === level
+    );
+    const hasName =
+      scoresFromLevel.filter(
+        (score) => score.name.toLowerCase() === name.toLowerCase()
+      ).length > 0;
+
+    return hasName;
+  };
 
   return (
     <BrowserRouter>
@@ -69,7 +81,14 @@ function App() {
         <Route path="game">
           <Route
             path=":level"
-            element={<GameLevel levelsData={levelsData} />}
+            element={
+              <GameLevel
+                levelsData={levelsData}
+                checkIfNameInLeadearboardIsRepeated={
+                  checkIfNameInLeadearboardIsRepeated
+                }
+              />
+            }
           />
         </Route>
       </Routes>
