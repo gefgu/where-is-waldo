@@ -8,6 +8,7 @@ const Leaderboard = ({ levelsData, leaderboardData }) => {
   leaderboardData = leaderboardData.filter(
     (data) => data.level === currentLevel
   );
+  leaderboardData.sort((a, b) => a.time - b.time);
 
   const changeLevelInDisplay = (level) => {
     setCurrentLevel(level);
