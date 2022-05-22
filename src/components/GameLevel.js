@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "../styles/gamelevel.css";
 import SelectionMenu from "./SelectionMenu";
 import { Link, useParams } from "react-router-dom";
@@ -14,11 +14,11 @@ const GameLevel = ({ levelsData }) => {
   const [lastClickY, setLastClickY] = useState(-10);
   const [hits, setHits] = useState({});
 
+  const startTime = useRef(Date.now());
+
   const hitTarget = (xClick, yClick, xPosition, yPosition) => {
     const withinXBoundary = xClick > xPosition - 20 && xClick < xPosition + 20;
     const whithinYBoundary = yClick > yPosition - 20 && yClick < yPosition + 20;
-    console.log([xClick, yClick, xPosition, yPosition]);
-    console.log([withinXBoundary, whithinYBoundary]);
     if (withinXBoundary && whithinYBoundary) {
       return true;
     }
@@ -63,7 +63,8 @@ const GameLevel = ({ levelsData }) => {
   };
 
   const endGame = () => {
-    alert("Win");
+    const finalTime = (Date.now() - startTime.current) / 1000; // To milliseconds to seconds
+    alert(`Win time: ${finalTime} Seconds`);
   };
 
   return (
@@ -105,7 +106,7 @@ const GameLevel = ({ levelsData }) => {
           const ih = e.target.naturalHeight;
           const xPositionOnImage = (x / cw) * iw;
           const yPositionOnImage = (y / ch) * ih;
-          console.log([xPositionOnImage, yPositionOnImage]);
+          // console.log([xPositionOnImage, yPositionOnImage]);
           setLastClickX(xPositionOnImage);
           setLastClickY(yPositionOnImage);
           setMenuX(x);
