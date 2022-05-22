@@ -19,7 +19,9 @@ const Leaderboard = ({ levelsData, leaderboardData }) => {
       <div>
         <h1>Leaderboard</h1>
         <div className="buttons">
-          <button className="play">Play This Level</button>
+          <Link to={`/game/${currentLevel}`}>
+            <button className="play">Play This Level</button>
+          </Link>
           <Link to="/">
             <button className="back">Back To Home</button>
           </Link>
@@ -43,7 +45,7 @@ const Leaderboard = ({ levelsData, leaderboardData }) => {
             {leaderboardData &&
               leaderboardData.map((data) => {
                 return (
-                  <tr>
+                  <tr key={data.name}>
                     <td>{data.name}</td>
                     <td>{data.time}</td>
                   </tr>

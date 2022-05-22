@@ -40,7 +40,6 @@ function App() {
       const leaderboardQuery = query(
         collection(getFirestore(), "leaderboard"),
         orderBy("level", "asc"),
-        // orderBy("time", "asc")
       );
 
       const leaderboardSnapshot = await getDocs(leaderboardQuery);
