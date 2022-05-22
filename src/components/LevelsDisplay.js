@@ -1,13 +1,18 @@
 import "../styles/levelsDisplay.css";
 
-const LevelsDisplay = ({ levelsData, clickFunction }) => {
+const LevelsDisplay = ({
+  levelsData,
+  clickFunction,
+  displayIcons = true,
+  highlight,
+}) => {
   return (
     <div className="levels-display">
       {levelsData.map((levelData) => {
         const level = levelData.level;
         return (
           <div
-            className="level"
+            className={`level${level === highlight ? " highlight" : ""}`}
             onClick={() => {
               clickFunction(level);
             }}
@@ -20,15 +25,16 @@ const LevelsDisplay = ({ levelsData, clickFunction }) => {
             <div className="description">
               {`Level ${level}`}
               <div className="icons">
-                {Object.keys(levelData.positions).map((character) => {
-                  return (
-                    <img
-                      key={character}
-                      src={require(`../assets/${character}.jpg`)}
-                      alt={character}
-                    />
-                  );
-                })}
+                {displayIcons &&
+                  Object.keys(levelData.positions).map((character) => {
+                    return (
+                      <img
+                        key={character}
+                        src={require(`../assets/${character}.jpg`)}
+                        alt={character}
+                      />
+                    );
+                  })}
               </div>
             </div>
           </div>

@@ -37,3 +37,7 @@
 .level .icons img {
   height: 30px;
 }
+
+.level.highlight {
+  background-color: #fee2e2;
+}

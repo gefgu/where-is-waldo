@@ -28,6 +28,8 @@ const Leaderboard = ({ levelsData, leaderboardData }) => {
       <LevelsDisplay
         levelsData={levelsData}
         clickFunction={changeLevelInDisplay}
+        displayIcons={false}
+        highlight={currentLevel}
       />
       <div className="data">
         <table>
