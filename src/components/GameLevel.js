@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import "../styles/gamelevel.css";
 import SelectionMenu from "./SelectionMenu";
 import { Link, useParams } from "react-router-dom";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
 
 const GameLevel = ({ levelsData }) => {
   const level = +useParams().level;
@@ -62,9 +63,23 @@ const GameLevel = ({ levelsData }) => {
     }
   };
 
+  const saveScore = async (name, time) => {
+    try {
+      await addDoc(collection(getFirestore(), "leaderboard"), {
+        name: name,
+        time: time,
+        level: level,
+      });
+    } catch (error) {
+      console.error("Error writing new score to Firebase Database", error);
+    }
+  };
+
   const endGame = () => {
     const finalTime = (Date.now() - startTime.current) / 1000; // To milliseconds to seconds
     alert(`Win time: ${finalTime} Seconds`);
+    const name = prompt("What's Your Name: (For Leaderboard)");
+    saveScore(name, finalTime);
   };
 
   return (
