@@ -19,6 +19,7 @@ function App() {
   const app = initializeApp(firebaseConfig);
 
   const [levelsData, setLevelsData] = useState([]);
+  const [leaderboardData, setLeaderboardData] = useState([]);
 
   useEffect(() => {
     const getLevelData = async () => {
@@ -35,6 +36,22 @@ function App() {
       setLevelsData(newLevelData);
     };
     getLevelData();
+    const getLeaderboardData = async () => {
+      const leaderboardQuery = query(
+        collection(getFirestore(), "leaderboard"),
+        orderBy("level", "asc"),
+        orderBy("time", "asc")
+      );
+
+      const leaderboardSnapshot = await getDocs(leaderboardQuery);
+      let newLeaderboardData = [];
+      leaderboardSnapshot.forEach((score) => {
+        newLeaderboardData.push(score.data());
+      });
+      console.log(newLeaderboardData);
+      setLeaderboardData(newLeaderboardData);
+    };
+    getLeaderboardData();
   }, []);
 
   return (
