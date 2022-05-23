@@ -6,7 +6,7 @@ const UserForm = ({
   shouldDisplay,
   time,
   submitScore,
-  showErrorMessage = true,
+  showErrorMessage = false,
 }) => {
   const positionStyle = {};
   if (!shouldDisplay) positionStyle["display"] = "none";
@@ -33,9 +33,7 @@ const UserForm = ({
               className={showErrorMessage ? "error" : ""}
             />
             <span
-              className={
-                "error-message " + (showErrorMessage ? "show" : "hide")
-              }
+              className={"error-message" + (showErrorMessage ? "" : " hide")}
             >
               Use another username
             </span>

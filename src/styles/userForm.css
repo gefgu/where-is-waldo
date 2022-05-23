@@ -59,6 +59,10 @@
   color: #dc2626;
 }
 
+.user-form .error-message.hide {
+  visibility: hidden;
+}
+
 .button-section {
   padding: 20px 16px;
   display: flex;
