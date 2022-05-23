@@ -6,12 +6,13 @@ const UserForm = ({
   shouldDisplay,
   time,
   submitScore,
+  handleInput,
+  userName,
   showErrorMessage = false,
 }) => {
   const positionStyle = {};
   if (!shouldDisplay) positionStyle["display"] = "none";
 
-  const [name, setName] = useState("");
 
   return (
     <div
@@ -29,7 +30,8 @@ const UserForm = ({
             <label htmlFor="username">Username</label>
             <input
               name="username"
-              onInput={(e) => setName(e.target.value)}
+              value={userName}
+              onInput={handleInput}
               className={showErrorMessage ? "error" : ""}
             />
             <span
@@ -48,7 +50,7 @@ const UserForm = ({
               type="submit"
               className="submit"
               onClick={(e) => {
-                submitScore(e, name, time);
+                submitScore(e);
               }}
             >
               Submit Score

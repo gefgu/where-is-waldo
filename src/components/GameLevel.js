@@ -5,7 +5,11 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import UserForm from "./UserForm";
 
-const GameLevel = ({ levelsData, isNameInLeaderboardRepeated, updateLeaderboardData }) => {
+const GameLevel = ({
+  levelsData,
+  isNameInLeaderboardRepeated,
+  updateLeaderboardData,
+}) => {
   const level = +useParams().level;
   const levelData = levelsData.filter((value) => value.level === level)[0];
 
@@ -19,6 +23,10 @@ const GameLevel = ({ levelsData, isNameInLeaderboardRepeated, updateLeaderboardD
   const startTime = useRef(Date.now());
   const [endTime, setEndTime] = useState(startTime.current);
   const [shouldDisplayForm, setShouldDisplayForm] = useState(false);
+
+  const [userName, setUserName] = useState("");
+  const [useFormValidation, setUseFormValidation] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   let navigate = useNavigate();
 
@@ -66,6 +74,18 @@ const GameLevel = ({ levelsData, isNameInLeaderboardRepeated, updateLeaderboardD
     }
   };
 
+  const handleUserNameInput = (e) => {
+    const newUserName = e.target.value;
+    if (useFormValidation) {
+      if (isNameInLeaderboardRepeated(newUserName, level)) {
+        setShowErrorMessage(true);
+      } else {
+        setShowErrorMessage(false);
+      }
+    }
+    setUserName(e.target.value);
+  };
+
   const saveScore = async (name, time) => {
     try {
       await addDoc(collection(getFirestore(), "leaderboard"), {
@@ -83,13 +103,15 @@ const GameLevel = ({ levelsData, isNameInLeaderboardRepeated, updateLeaderboardD
     setShouldDisplayForm(true);
   };
 
-  const submitScore = (event, name, time) => {
+  const submitScore = (event) => {
     event.preventDefault();
-    if (name && !isNameInLeaderboardRepeated(name)) {
-      // Do check in form while typing
-      saveScore(name, time);
+    if (userName && !isNameInLeaderboardRepeated(userName, level)) {
+      saveScore(userName, endTime);
       updateLeaderboardData();
       navigate(`/leaderboard/${level}`);
+    } else {
+      setUseFormValidation(true);
+      setShowErrorMessage(true);
     }
   };
 
@@ -149,6 +171,8 @@ const GameLevel = ({ levelsData, isNameInLeaderboardRepeated, updateLeaderboardD
           shouldDisplay={shouldDisplayForm}
           time={endTime}
           submitScore={submitScore}
+          handleInput={handleUserNameInput}
+          showErrorMessage={showErrorMessage}
         />
         <img
           src={require(`../assets/level-${level}.jpg`)}
