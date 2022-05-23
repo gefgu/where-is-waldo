@@ -101,6 +101,5 @@ function App() {
 export default App;
 
 // TODOS:
-// Update leaderboard after submit
 // Add X mark in hit spots
 // Add start button before game starts

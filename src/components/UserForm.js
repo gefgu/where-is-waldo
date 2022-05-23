@@ -2,7 +2,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/userForm.css";
 
-const UserForm = ({ shouldDisplay, time, submitScore }) => {
+const UserForm = ({
+  shouldDisplay,
+  time,
+  submitScore,
+  showErrorMessage = true,
+}) => {
   const positionStyle = {};
   if (!shouldDisplay) positionStyle["display"] = "none";
 
@@ -21,8 +26,19 @@ const UserForm = ({ shouldDisplay, time, submitScore }) => {
         <form>
           <div className="input-section">
             <p>Enter your name to save your score on the global leaderboard.</p>
-            <label htmlFor="username">Username (Use a new username)</label>
-            <input name="username" onInput={(e) => setName(e.target.value)} />
+            <label htmlFor="username">Username</label>
+            <input
+              name="username"
+              onInput={(e) => setName(e.target.value)}
+              className={showErrorMessage ? "error" : ""}
+            />
+            <span
+              className={
+                "error-message " + (showErrorMessage ? "show" : "hide")
+              }
+            >
+              Use another username
+            </span>
           </div>
           <div className="button-section">
             <Link to="/">
