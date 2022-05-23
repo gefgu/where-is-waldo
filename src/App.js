@@ -21,34 +21,35 @@ function App() {
   const [levelsData, setLevelsData] = useState([]);
   const [leaderboardData, setLeaderboardData] = useState([]);
 
+  const getLeaderboardData = async () => {
+    const leaderboardQuery = query(
+      collection(getFirestore(), "leaderboard"),
+      orderBy("level", "asc")
+    );
+
+    const leaderboardSnapshot = await getDocs(leaderboardQuery);
+    let newLeaderboardData = [];
+    leaderboardSnapshot.forEach((score) => {
+      newLeaderboardData.push(score.data());
+    });
+    setLeaderboardData(newLeaderboardData);
+  };
+  const getLevelData = async () => {
+    const levelsQuery = query(
+      collection(getFirestore(), "levelData"),
+      orderBy("level", "asc")
+    );
+
+    const levelsSnapshot = await getDocs(levelsQuery);
+    let newLevelData = [];
+    levelsSnapshot.forEach((level) => {
+      newLevelData.push(level.data());
+    });
+    setLevelsData(newLevelData);
+  };
+
   useEffect(() => {
-    const getLevelData = async () => {
-      const levelsQuery = query(
-        collection(getFirestore(), "levelData"),
-        orderBy("level", "asc")
-      );
-
-      const levelsSnapshot = await getDocs(levelsQuery);
-      let newLevelData = [];
-      levelsSnapshot.forEach((level) => {
-        newLevelData.push(level.data());
-      });
-      setLevelsData(newLevelData);
-    };
     getLevelData();
-    const getLeaderboardData = async () => {
-      const leaderboardQuery = query(
-        collection(getFirestore(), "leaderboard"),
-        orderBy("level", "asc")
-      );
-
-      const leaderboardSnapshot = await getDocs(leaderboardQuery);
-      let newLeaderboardData = [];
-      leaderboardSnapshot.forEach((score) => {
-        newLeaderboardData.push(score.data());
-      });
-      setLeaderboardData(newLeaderboardData);
-    };
     getLeaderboardData();
   }, []);
 
@@ -84,9 +85,8 @@ function App() {
             element={
               <GameLevel
                 levelsData={levelsData}
-                isNameInLeaderboardRepeated={
-                  isNameInLeaderboardRepeated
-                }
+                isNameInLeaderboardRepeated={isNameInLeaderboardRepeated}
+                updateLeaderboardData={getLeaderboardData}
               />
             }
           />

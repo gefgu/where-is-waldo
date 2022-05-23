@@ -5,7 +5,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import UserForm from "./UserForm";
 
-const GameLevel = ({ levelsData, isNameInLeaderboardRepeated }) => {
+const GameLevel = ({ levelsData, isNameInLeaderboardRepeated, updateLeaderboardData }) => {
   const level = +useParams().level;
   const levelData = levelsData.filter((value) => value.level === level)[0];
 
@@ -85,11 +85,10 @@ const GameLevel = ({ levelsData, isNameInLeaderboardRepeated }) => {
 
   const submitScore = (event, name, time) => {
     event.preventDefault();
-    console.log(name);
-    console.log(isNameInLeaderboardRepeated(name));
     if (name && !isNameInLeaderboardRepeated(name)) {
       // Do check in form while typing
       saveScore(name, time);
+      updateLeaderboardData();
       navigate("/leaderboard");
     }
   };
