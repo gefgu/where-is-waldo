@@ -1,10 +1,11 @@
 import LevelsDisplay from "./LevelsDisplay";
 import "../styles/leaderboard.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 
 const Leaderboard = ({ levelsData, leaderboardData }) => {
-  const [currentLevel, setCurrentLevel] = useState(1);
+  const level = +useParams().level || 1;
+  const [currentLevel, setCurrentLevel] = useState(level);
   leaderboardData = leaderboardData.filter(
     (data) => data.level === currentLevel
   );

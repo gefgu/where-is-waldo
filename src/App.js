@@ -78,7 +78,9 @@ function App() {
               leaderboardData={leaderboardData}
             />
           }
-        />
+        >
+          <Route path=":level" element={<div></div>} />
+        </Route>
         <Route path="game">
           <Route
             path=":level"

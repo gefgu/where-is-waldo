@@ -89,7 +89,7 @@ const GameLevel = ({ levelsData, isNameInLeaderboardRepeated, updateLeaderboardD
       // Do check in form while typing
       saveScore(name, time);
       updateLeaderboardData();
-      navigate("/leaderboard");
+      navigate(`/leaderboard/${level}`);
     }
   };
 
