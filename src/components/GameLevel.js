@@ -1,11 +1,11 @@
 import { useState, useRef } from "react";
 import "../styles/gamelevel.css";
 import SelectionMenu from "./SelectionMenu";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import UserForm from "./UserForm";
 
-const GameLevel = ({ levelsData, checkIfNameInLeadearboardIsRepeated }) => {
+const GameLevel = ({ levelsData, isNameInLeaderboardRepeated }) => {
   const level = +useParams().level;
   const levelData = levelsData.filter((value) => value.level === level)[0];
 
@@ -17,6 +17,10 @@ const GameLevel = ({ levelsData, checkIfNameInLeadearboardIsRepeated }) => {
   const [hits, setHits] = useState({});
 
   const startTime = useRef(Date.now());
+  const [endTime, setEndTime] = useState(startTime.current);
+  const [shouldDisplayForm, setShouldDisplayForm] = useState(false);
+
+  let navigate = useNavigate();
 
   const hitTarget = (xClick, yClick, xPosition, yPosition) => {
     const withinXBoundary = xClick > xPosition - 20 && xClick < xPosition + 20;
@@ -75,15 +79,37 @@ const GameLevel = ({ levelsData, checkIfNameInLeadearboardIsRepeated }) => {
   };
 
   const endGame = () => {
-    const finalTime = (Date.now() - startTime.current) / 1000; // To milliseconds to seconds
-    alert(`Win time: ${finalTime} Seconds`);
-    let name;
-    do {
-      name = prompt("What's Your Name: (For Leaderboard)");
-    } while (checkIfNameInLeadearboardIsRepeated(name, level));
-    if (name) {
-      saveScore(name, finalTime);
+    setEndTime((Date.now() - startTime.current) / 1000); // To milliseconds to seconds
+    setShouldDisplayForm(true);
+  };
+
+  const submitScore = (event, name, time) => {
+    event.preventDefault();
+    console.log(name);
+    console.log(isNameInLeaderboardRepeated(name));
+    if (name && !isNameInLeaderboardRepeated(name)) {
+      // Do check in form while typing
+      saveScore(name, time);
+      navigate("/leaderboard");
     }
+  };
+
+  const handleImageClick = (e) => {
+    if (!shouldDisplayMenu) setShouldDisplayMenu(true);
+    const bounds = e.target.getBoundingClientRect();
+    const x = e.clientX - bounds.left;
+    const y = e.clientY - bounds.top;
+    const cw = e.target.clientWidth;
+    const ch = e.target.clientHeight;
+    const iw = e.target.naturalWidth;
+    const ih = e.target.naturalHeight;
+    const xPositionOnImage = (x / cw) * iw;
+    const yPositionOnImage = (y / ch) * ih;
+    // console.log([xPositionOnImage, yPositionOnImage]);
+    setLastClickX(xPositionOnImage);
+    setLastClickY(yPositionOnImage);
+    setMenuX(x);
+    setMenuY(y);
   };
 
   return (
@@ -112,26 +138,7 @@ const GameLevel = ({ levelsData, checkIfNameInLeadearboardIsRepeated }) => {
           <button className="back">Return Home</button>
         </Link>
       </div>
-      <div
-        className="game"
-        onClick={(e) => {
-          if (!shouldDisplayMenu) setShouldDisplayMenu(true);
-          const bounds = e.target.getBoundingClientRect();
-          const x = e.clientX - bounds.left;
-          const y = e.clientY - bounds.top;
-          const cw = e.target.clientWidth;
-          const ch = e.target.clientHeight;
-          const iw = e.target.naturalWidth;
-          const ih = e.target.naturalHeight;
-          const xPositionOnImage = (x / cw) * iw;
-          const yPositionOnImage = (y / ch) * ih;
-          // console.log([xPositionOnImage, yPositionOnImage]);
-          setLastClickX(xPositionOnImage);
-          setLastClickY(yPositionOnImage);
-          setMenuX(x);
-          setMenuY(y);
-        }}
-      >
+      <div className="game" onClick={handleImageClick}>
         <SelectionMenu
           x={menuX}
           y={menuY}
@@ -139,7 +146,11 @@ const GameLevel = ({ levelsData, checkIfNameInLeadearboardIsRepeated }) => {
           handleSelection={handleSelection}
           levelData={levelData}
         />
-        <UserForm />
+        <UserForm
+          shouldDisplay={shouldDisplayForm}
+          time={endTime}
+          submitScore={submitScore}
+        />
         <img
           src={require(`../assets/level-${level}.jpg`)}
           alt={`Level ${level}`}

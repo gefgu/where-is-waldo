@@ -52,7 +52,7 @@ function App() {
     getLeaderboardData();
   }, []);
 
-  const checkIfNameInLeadearboardIsRepeated = (name, level) => {
+  const isNameInLeaderboardRepeated = (name, level) => {
     const scoresFromLevel = leaderboardData.filter(
       (data) => data.level === level
     );
@@ -84,8 +84,8 @@ function App() {
             element={
               <GameLevel
                 levelsData={levelsData}
-                checkIfNameInLeadearboardIsRepeated={
-                  checkIfNameInLeadearboardIsRepeated
+                isNameInLeaderboardRepeated={
+                  isNameInLeaderboardRepeated
                 }
               />
             }
@@ -99,6 +99,6 @@ function App() {
 export default App;
 
 // TODOS:
-// Add Form
+// Update leaderboard after submit
 // Add X mark in hit spots
 // Add start button before game starts
