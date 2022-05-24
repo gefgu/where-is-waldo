@@ -134,7 +134,14 @@ const GameLevel = ({
   };
 
   return (
-    <div className="game-container">
+    <div
+      className="game-container"
+      onClick={(e) => {
+        if (!(e.target.tagName === "IMG")) {
+          setShouldDisplayMenu(false);
+        }
+      }}
+    >
       <div className="level-description">
         <div className="icons">
           {levelData
