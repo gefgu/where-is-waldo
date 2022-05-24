@@ -1,6 +1,13 @@
 import "../styles/selectionMenu.css";
 
-const SelectionMenu = ({ x, y, shouldDisplay, handleSelection, levelData }) => {
+const SelectionMenu = ({
+  x,
+  y,
+  shouldDisplay,
+  handleSelection,
+  levelData,
+  hits,
+}) => {
   const positionStyle = {
     top: y,
     left: x,
@@ -12,7 +19,13 @@ const SelectionMenu = ({ x, y, shouldDisplay, handleSelection, levelData }) => {
       <div className="selection-menu" style={positionStyle}>
         {Object.keys(levelData.positions).map((character) => {
           return (
-            <div onClick={(e) => handleSelection(e, character)} key={character}>
+            <div
+              onClick={(e) => {
+                handleSelection(e, character);
+              }}
+              key={character}
+              className={hits[character] ? "disabled" : ""}
+            >
               <img
                 src={require(`../assets/${character}.jpg`)}
                 alt={character}

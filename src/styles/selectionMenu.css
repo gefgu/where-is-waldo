@@ -1,8 +1,6 @@
 .selection-menu {
   background-color: white;
   color: black;
-  /* width: 100px; */
-  /* height: 60px; */
   position: absolute;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
   display: flex;
@@ -23,12 +21,17 @@
   cursor: pointer;
 }
 
+.selection-menu > div.disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
 .selection-menu > div:hover {
-  background-color: #F3F4F6;
+  background-color: #f3f4f6;
 }
 
 .selection-menu > div:active {
-  background-color: #E5E7EB;
+  background-color: #e5e7eb;
 }
 
 .selection-menu img {

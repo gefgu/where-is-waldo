@@ -166,6 +166,7 @@ const GameLevel = ({
           shouldDisplay={shouldDisplayMenu}
           handleSelection={handleSelection}
           levelData={levelData}
+          hits={hits}
         />
         <UserForm
           shouldDisplay={shouldDisplayForm}
