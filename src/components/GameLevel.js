@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "../styles/gamelevel.css";
 import SelectionMenu from "./SelectionMenu";
 import { Link, useParams, useNavigate } from "react-router-dom";
@@ -29,6 +29,24 @@ const GameLevel = ({
   const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   let navigate = useNavigate();
+
+  const [descriptionIsSticky, setDescriptionIsSticky] = useState(false);
+  const descriptionRef = useRef();
+  useEffect(() => {
+    const cachedRef = descriptionRef.current;
+    const observer = new IntersectionObserver(
+      ([e]) => setDescriptionIsSticky(e.intersectionRatio < 1),
+      {
+        threshold: [1],
+      }
+    );
+
+    observer.observe(cachedRef);
+
+    return () => {
+      observer.unobserve(cachedRef);
+    };
+  }, []);
 
   const hitTarget = (xClick, yClick, xPosition, yPosition) => {
     const withinXBoundary = xClick > xPosition - 20 && xClick < xPosition + 20;
@@ -142,7 +160,10 @@ const GameLevel = ({
         }
       }}
     >
-      <div className="level-description">
+      <div
+        ref={descriptionRef}
+        className={`level-description ${(descriptionIsSticky ? "sticky" : "")}`}
+      >
         <div className="icons">
           {levelData
             ? Object.keys(levelData.positions).map((character) => {
