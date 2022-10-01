@@ -2,6 +2,10 @@
 
 ![screenshot](waldo.png)
 
+• Uses Firebase to keep track of score (and leaderboard).  
+• Uses advanced React to handle correct tagging of characters.  
+• Built using custom CSS.
+
 ## How I worked on this project
 
 My goal was to build a Where's Waldo? game.
