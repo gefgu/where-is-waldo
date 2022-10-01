@@ -16,7 +16,7 @@ import firebaseConfig from "./firebaseConfig";
 import "./styles/app.css";
 
 function App() {
-  const app = initializeApp(firebaseConfig);
+  initializeApp(firebaseConfig);
 
   const [levelsData, setLevelsData] = useState([]);
   const [leaderboardData, setLeaderboardData] = useState([]);
